@@ -1,0 +1,13 @@
+
+.DS_Store
+*.swp
+*.pyc
+*checkpoint.ipynb
+*checkpoints
+.DS_Store
+.Rhistory
+*.tmp
+*.o
+*.RDS
+*.csv
+CON_CO2_cont_time
