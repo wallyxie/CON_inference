@@ -1,2 +1,2 @@
-# CON_inference
-Code for inference of deterministic CON soil biogeochemical ODE model parameters in Stan with synthetic data generated from the SCON-SS SDE system. 
+# Deterministic CON soil biogeochemical model inference conditional on synthetic data.
+Stan code for inference of deterministic CON soil biogeochemical ODE model parameters conditional on synthetic data generated from the SCON-SS stochastic differential equation system.
