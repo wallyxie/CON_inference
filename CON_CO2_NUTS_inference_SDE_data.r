@@ -80,13 +80,13 @@ lines <- readLines(file_path, encoding = "ASCII")
 for (n in 1:length(lines)) cat(lines[n],'\n')
 model <- cmdstan_model(file_path)
 
-CON_stan_fit_CO2 <- model$sample(data = data_list, seed = 1234, refresh = 10, init = init_theta, iter_sampling = 5000, iter_warmup = 1000, chains = 4, parallel_chains = 4, adapt_delta = 0.95)
+CON_stan_fit_CO2 <- model$sample(data = data_list, seed = 1234, refresh = 10, init = init_theta, iter_sampling = 5000, iter_warmup = 2000, chains = 4, parallel_chains = 4, adapt_delta = 0.95)
 
 #Save Stan fit object and NUTS inference results.
-CON_stan_fit_CO2$save_object(file = "CON_SS_CO2_NUTS_inference_SDE_data.rds")
+CON_stan_fit_CO2$save_object(file = "CON_CO2_NUTS_inference_SDE_data.rds")
 CON_stan_fit_CO2_post <- as.tibble(CON_stan_fit_CO2$draws(c("u_M", "a_SD", "a_DS", "a_M", "a_MSC", "k_S_ref", "k_D_ref", "k_M_ref", "Ea_S", "Ea_D", "Ea_M")))
-write_csv(CON_stan_fit_CO2_post, "CON_SS_CO2_NUTS_inference_SDE_data_post.csv")
+write_csv(CON_stan_fit_CO2_post, "CON_CO2_NUTS_inference_SDE_data_post.csv")
 CON_stan_fit_CO2_post_pred <- as_tibble(CON_stan_fit_CO2$draws("y_hat_post_pred"))
-write_csv(CON_stan_fit_CO2_post_pred, "CON_SS_CO2_NUTS_inference_SDE_data_post_pred.csv")
+write_csv(CON_stan_fit_CO2_post_pred, "CON_CO2_NUTS_inference_SDE_data_post_pred.csv")
 CON_stan_fit_CO2_summary <- CON_stan_fit_CO2$summary(c("u_M", "a_SD", "a_DS", "a_M", "a_MSC", "k_S_ref", "k_D_ref", "k_M_ref", "Ea_S", "Ea_D", "Ea_M", "y_hat_post_pred"))
-write_csv(CON_stan_fit_CO2_summary, "CON_SS_CO2_NUTS_inference_SDE_data_post_and_post_pred_summary.csv")
+write_csv(CON_stan_fit_CO2_summary, "CON_CO2_NUTS_inference_SDE_data_post_and_post_pred_summary.csv")
