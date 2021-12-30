@@ -48,7 +48,7 @@ init_theta_single = list(
                   k_M_ref = k_M_ref_prior_dist_params[1],
                   Ea_S = Ea_S_prior_dist_params[1],
                   Ea_D = Ea_D_prior_dist_params[1],
-                  Ea_M = Ea_M_prior_dist_params[1],
+                  Ea_M = Ea_M_prior_dist_params[1]
                   )
 init_theta = list(init_theta_single)[rep(1, 4)] #4 copies of initial theta proposals for each of the 4 HMC chains to be used.
 
