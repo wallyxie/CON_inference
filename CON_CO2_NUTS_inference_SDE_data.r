@@ -88,5 +88,5 @@ CON_stan_fit_CO2_post <- as.tibble(CON_stan_fit_CO2$draws(c("u_M", "a_SD", "a_DS
 write_csv(CON_stan_fit_CO2_post, "CON_CO2_NUTS_inference_SDE_data_post.csv")
 CON_stan_fit_CO2_post_pred <- as_tibble(CON_stan_fit_CO2$draws("y_hat_post_pred"))
 write_csv(CON_stan_fit_CO2_post_pred, "CON_CO2_NUTS_inference_SDE_data_post_pred.csv")
-CON_stan_fit_CO2_summary <- CON_stan_fit_CO2$summary(c("u_M", "a_SD", "a_DS", "a_M", "a_MSC", "k_S_ref", "k_D_ref", "k_M_ref", "Ea_S", "Ea_D", "Ea_M", "y_hat_post_pred"))
+CON_stan_fit_CO2_summary <- as_tibble(CON_stan_fit_CO2$summary(c("u_M", "a_SD", "a_DS", "a_M", "a_MSC", "k_S_ref", "k_D_ref", "k_M_ref", "Ea_S", "Ea_D", "Ea_M", "y_hat_post_pred")))
 write_csv(CON_stan_fit_CO2_summary, "CON_CO2_NUTS_inference_SDE_data_post_and_post_pred_summary.csv")
