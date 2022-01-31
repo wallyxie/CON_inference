@@ -12,8 +12,8 @@
 *.csv
 CON_CO2_cont_time
 CON_posterior_plotting.r
-plot_prior_post.ipynb
 LogitNormal.py
 obs_and_flow.py
 generated_data/SCON-C_CO2_logit_short_2022_01_20_08_53_sample_y_t_5000_dt_0-01_sd_scale_0-25_hyperparams.pt
 generated_data/SCON-C_CO2_logit_short_2022_01_20_08_53_sample_y_t_5000_dt_0-01_sd_scale_0-25_rsample.pt
+plot_prior_post_CON.ipynb
