@@ -14,8 +14,8 @@ prior_scale_factor <- 0.25
 obs_error_scale <- 0.1
 obs_every <- 5 #Observations every 10 hours.
 t <- 1000 #Total time span of ODE simulation.
-x_hat0 <- c(54.48449263, 2.73134465, 4.76492166) #Originally sampled values used for Euler-Maruyama solution.
-y_full <- read_csv('generated_data/SCON-SS_CO2_logit_short_2021_11_17_20_16_sample_y_t_5000_dt_0-01_sd_scale_0-25.csv')
+x_hat0 <- c(54.014866, 2.595037, 4.777019) #Originally sampled values used for Euler-Maruyama solution.
+y_full <- read_csv('generated_data/SCON-C_CO2_logit_short_2022_01_20_08_53_sample_y_t_5000_dt_0-01_sd_scale_0-25.csv')
 y <- y_full %>% filter(hour <= t) %>% tail(-1)
 ts <- y$hour
 N_t <- length(ts)
@@ -83,10 +83,10 @@ model <- cmdstan_model(file_path)
 CON_stan_fit_CO2 <- model$sample(data = data_list, seed = 1234, refresh = 100, init = init_theta, iter_sampling = 5000, iter_warmup = 1000, chains = 4, parallel_chains = 4, adapt_delta = 0.95)
 
 #Save Stan fit object and NUTS inference results.
-CON_stan_fit_CO2$save_object(file = "CON_CO2_NUTS_inference_SDE_data.rds")
+CON_stan_fit_CO2$save_object(file = "NUTS_results/CON_CO2_NUTS_inference_SCON-C_data.rds")
 CON_stan_fit_CO2_post <- as_tibble(CON_stan_fit_CO2$draws(c("u_M", "a_SD", "a_DS", "a_M", "a_MSC", "k_S_ref", "k_D_ref", "k_M_ref", "Ea_S", "Ea_D", "Ea_M")))
-write_csv(CON_stan_fit_CO2_post, "CON_CO2_NUTS_inference_SDE_data_post.csv")
+write_csv(CON_stan_fit_CO2_post, "NUTS_results/CON_CO2_NUTS_inference_SCON-C_data_post.csv")
 CON_stan_fit_CO2_post_pred <- as_tibble(CON_stan_fit_CO2$draws("y_hat_post_pred"))
-write_csv(CON_stan_fit_CO2_post_pred, "CON_CO2_NUTS_inference_SDE_data_post_pred.csv")
+write_csv(CON_stan_fit_CO2_post_pred, "NUTS_results/CON_CO2_NUTS_inference_SCON-C_data_post_pred.csv")
 CON_stan_fit_CO2_summary <- as_tibble(CON_stan_fit_CO2$summary(c("u_M", "a_SD", "a_DS", "a_M", "a_MSC", "k_S_ref", "k_D_ref", "k_M_ref", "Ea_S", "Ea_D", "Ea_M", "y_hat_post_pred")))
-write_csv(CON_stan_fit_CO2_summary, "CON_CO2_NUTS_inference_SDE_data_post_and_post_pred_summary.csv")
+write_csv(CON_stan_fit_CO2_summary, "NUTS_results/CON_CO2_NUTS_inference_SCON-C_data_post_and_post_pred_summary.csv")
