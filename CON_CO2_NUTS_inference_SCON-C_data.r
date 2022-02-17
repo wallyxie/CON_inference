@@ -81,7 +81,7 @@ lines <- readLines(file_path, encoding = "ASCII")
 for (n in 1:length(lines)) cat(lines[n],'\n')
 model <- cmdstan_model(file_path)
 
-CON_stan_fit_CO2 <- model$sample(data = data_list, seed = 1234, refresh = 100, init = init_theta, iter_sampling = 5000, iter_warmup = 1000, chains = num_chains, parallel_chains = num_chains, adapt_delta = 0.95)
+CON_stan_fit_CO2 <- model$sample(data = data_list, seed = 12, refresh = 100, init = init_theta, iter_sampling = 5000, iter_warmup = 1000, chains = num_chains, parallel_chains = num_chains, adapt_delta = 0.95)
 
 #Save Stan fit object and NUTS inference results.
 CON_stan_fit_CO2$save_object(file = "NUTS_results/CON_CO2_NUTS_inference_SCON-C_data.rds")
