@@ -14,7 +14,7 @@ temp_rise <- 5 #High estimate of 5 celsius temperature rise by 2100.
 prior_scale_factor <- 0.25
 obs_error_scale <- 0.1
 obs_every <- 5 #Observations every 5 hours.
-t <- 1000 #Total time span of ODE simulation.
+t <- 5000 #Total time span of ODE simulation.
 x_hat0 <- c(54.014866, 2.595037, 4.777019) #Originally sampled values used for Euler-Maruyama solution.
 y_full <- read_csv('generated_data/SCON-C_CO2_logit_short_2022_01_20_08_53_sample_y_t_5000_dt_0-01_sd_scale_0-25.csv')
 y <- y_full %>% filter(hour <= t) %>% tail(-1)
