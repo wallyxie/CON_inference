@@ -156,6 +156,11 @@ data {
 
 transformed data {
   real t0 = 0; // Initial time.
+  vector<lower=0>[state_dim+1] obs_sd; // Observation noise based on state and CO2 magnitudes in data.
+
+  for (i in 1:state_dim + 1) {
+    obs_sd[i] = obs_error_scale * mean(y[i,]);
+  }
 }
 
 parameters {
@@ -215,7 +220,7 @@ model {
 
   // Likelihood evaluation.
   for (i in 1:state_dim+1) {
-    y[i,] ~ normal(x_hat_add_CO2[i,], obs_error_scale * mean(y[i,]));
+    y[i,] ~ normal(x_hat_add_CO2[i,], obs_error_scale * obs_sd[i]);
   }
 }
 
@@ -245,7 +250,7 @@ generated quantities {
 
   // Add observation noise to posterior predictive model output to obtain posterior predictive samples.
   for (i in 1:state_dim+1) {
-    y_hat_post_pred[i,] = normal_rng(x_hat_post_pred_add_CO2[i,], obs_error_scale * mean(y[i,]));
+    y_hat_post_pred[i,] = normal_rng(x_hat_post_pred_add_CO2[i,], obs_error_scale * obs_sd[i]);
   }
   print("Iteration posterior predictive y observation: ", y_hat_post_pred);
 
