@@ -215,7 +215,7 @@ model {
 
   // Likelihood evaluation.
   for (i in 1:state_dim+1) {
-    y[i,] ~ normal(x_hat_add_CO2[i,], obs_error_scale * x_hat_add_CO2[i,]);
+    y[i,] ~ normal(x_hat_add_CO2[i,], obs_error_scale * mean(x_hat_add_CO2[i,]));
   }
 }
 
