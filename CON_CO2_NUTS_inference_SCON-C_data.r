@@ -87,7 +87,7 @@ CON_stan_fit_CO2 <- model$sample(data = data_list, seed = 12, refresh = 10, init
 CON_stan_fit_CO2$save_object(file = "NUTS_results/CON_CO2_NUTS_inference_SCON-C_data.rds")
 CON_stan_fit_CO2_post <- as_tibble(CON_stan_fit_CO2$draws(c("u_M", "a_SD", "a_DS", "a_M", "a_MSC", "k_S_ref", "k_D_ref", "k_M_ref", "Ea_S", "Ea_D", "Ea_M"), format = "draws_df"))
 write_csv(CON_stan_fit_CO2_post, "NUTS_results/CON_CO2_NUTS_inference_SCON-C_data_post.csv")
-CON_stan_fit_CO2_post_pred <- as_tibble(CON_stan_fit_CO2$draws(("y_hat_post_pred"), format = "draws_df"))
+CON_stan_fit_CO2_post_pred <- as_tibble(CON_stan_fit_CO2$draws(format = "draws_df"))
 write_csv(CON_stan_fit_CO2_post_pred, "NUTS_results/CON_CO2_NUTS_inference_SCON-C_data_post_pred.csv")
 CON_stan_fit_CO2_summary <- as_tibble(CON_stan_fit_CO2$summary(c("u_M", "a_SD", "a_DS", "a_M", "a_MSC", "k_S_ref", "k_D_ref", "k_M_ref", "Ea_S", "Ea_D", "Ea_M", "y_hat_post_pred")))
 write_csv(CON_stan_fit_CO2_summary, "NUTS_results/CON_CO2_NUTS_inference_SCON-C_data_post_and_post_pred_summary.csv")
