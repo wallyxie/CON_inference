@@ -233,6 +233,8 @@ generated quantities {
 
   print("Iteration theta: ", "u_M = ", u_M, ", a_SD = ", a_SD, ", a_DS = ", a_DS, ", a_M = ", a_M, ", a_MSC = ", a_MSC, ", k_S_ref = ", k_S_ref, ", k_D_ref = ", k_D_ref, ", k_M_ref = ", k_M_ref, ", Ea_S = ", Ea_S, ", Ea_D = ", Ea_D, ", Ea_M = ", Ea_M);
 
+  print("Iteration x_hat_add_CO2: ", x_hat_add_CO2); 
+
   x_hat_post_pred_intmd = ode_rk45(CON_ODE, x_hat0, t0, ts, u_M, a_SD, a_DS, a_M, a_MSC, k_S_ref, k_D_ref, k_M_ref, Ea_S, Ea_D, Ea_M, temp_ref, temp_rise);
   // Transform posterior predictive model output to match observations y in dimensions, [state_dim, N_t].
   for (i in 1:N_t) {
@@ -252,7 +254,7 @@ generated quantities {
   for (i in 1:state_dim+1) {
     y_hat_post_pred[i,] = normal_rng(x_hat_post_pred_add_CO2[i,], obs_sd[i]);
   }
-  print("Iteration posterior predictive y observation: ", y_hat_post_pred);
+  //print("Iteration posterior predictive y observation: ", y_hat_post_pred);
 
   // Obtain prior predictive samples. 
   real u_M_prior_pred = normal_lb_ub_rng(u_M_prior_dist_params[1], u_M_prior_dist_params[1] * prior_scale_factor, u_M_prior_dist_params[2], u_M_prior_dist_params[3]);
