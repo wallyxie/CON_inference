@@ -1,3 +1,4 @@
+#Stan model coded for Stan version 2.29.1, not compatible with Stan version >= 2.32.0.
 library(cmdstanr)
 library(posterior)
 library(tidyverse)
